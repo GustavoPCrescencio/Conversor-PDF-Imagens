@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import './App.css'
 import MyDropzone from './components/DropZone/DropZone'
-import ExibirMiniaturasDeArquivos from './components/FilePreview/FilePreview'
 import { converterPdfEmImagens } from './pages/PdfToImage/PdfToImage'
+import SortableList from './components/SortableList/SortableList'
 
 function App() {
   const [arquivos, setArquivos] = useState<string[]>([])
-
-  // retorna um array de strings
+  
   const processarArquivos = async (lista :  File[]) => {
     const resultado = await Promise.all(lista.map(async arquivo => {
       if(arquivo.type === 'application/pdf') {
@@ -26,7 +25,7 @@ function App() {
     <section className='section'>
       <div className='container'>
         <MyDropzone onArquivosAdicionados={(e => processarArquivos(e))}/>
-        <ExibirMiniaturasDeArquivos lista={arquivos}/> 
+        <SortableList listaInicial={arquivos}/>
       </div>     
     </section>
   )

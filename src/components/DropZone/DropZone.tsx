@@ -21,7 +21,10 @@ function AreaSoltarArquivos({ onArquivosAdicionados } : DropZoneProps) {
         }
 })
     const arquivos = acceptedFiles.map(file => (
-        <li key={file.name}>
+        <li 
+            key={file.name}
+            style={{ listStyle: 'none' }}
+        >
             {file.name} | {file.type}
         </li>
     ))
