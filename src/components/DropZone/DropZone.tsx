@@ -1,21 +1,18 @@
 import { useDropzone } from "react-dropzone";
 
 type DropZoneProps = {
-    onArquivosAdicionados: (prop: File[]) => void
+    onArquivosAdicionados: (prop: File[]) => void,
+    accept: Record<string, string[]>
 }
 
-function AreaSoltarArquivos({ onArquivosAdicionados } : DropZoneProps) {
+function AreaSoltarArquivos({ onArquivosAdicionados, accept } : DropZoneProps) {
 
     const {
         acceptedFiles,
         getRootProps,
         getInputProps
     } = useDropzone({
-        accept: {
-        'image/png': ['.png'],
-        'image/jpeg': ['.jpeg'],
-        'application/pdf': ['.pdf'] 
-        }, 
+        accept,
         onDrop: (props) => {
             onArquivosAdicionados(props)
         }
