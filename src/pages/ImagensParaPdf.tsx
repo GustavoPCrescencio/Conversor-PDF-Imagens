@@ -3,6 +3,8 @@ import MyDropzone from '../components/DropZone/DropZone'
 import SortableList from '../components/SortableList/SortableList'
 import { converterImagensEmPdf } from '../services/imageToPdf'
 import { saveAs } from 'file-saver'
+import { Link } from 'react-router-dom'
+import './ImagensParaPdf.css'
 
 function ImagensParaPdf() {
     const [arquivos, setArquivos] = useState<string[]>([])
@@ -22,22 +24,38 @@ function ImagensParaPdf() {
     }
 
     return (
-        <section className='section'>
-            <div className='container'>
+        <section className='pagina'>
+            <header className='pagina-header'>
+                <Link to="/" className='pagina-voltar'>← Voltar</Link>
+                <h1 className='pagina-titulo'>Imagens para PDF</h1>
+            </header>
+
+            <div className='pagina-dropzone'>
                 <MyDropzone
                     onArquivosAdicionados={(e => processarArquivos(e))}
                     accept={{
                         'image/png': ['.png'],
-                        'image/jpeg': ['.jpeg', '.jpg'],
-                        'image/gif': ['.gif']
+                        'image/jpeg': ['.jpeg', '.jpg']
                     }}
                 />
-                <SortableList listaInicial={arquivos} />
             </div>
 
-            {arquivos.length == 0 ?
-                <div></div>
-                : <button onClick={() => baixarArquivosPdf(arquivos)}>Converter para PDF</button>
+            {arquivos.length === 0
+                ? <p className='pagina-lista-vazia'>Nenhuma imagem adicionada ainda.</p>
+                : <div className='pagina-lista'>
+                    <SortableList listaInicial={arquivos} />
+                </div>
+            }
+
+            {arquivos.length > 0 &&
+                <div className='pagina-acoes'>
+                    <button
+                        className='pagina-botao'
+                        onClick={() => baixarArquivosPdf(arquivos)}
+                    >
+                        Converter para PDF
+                    </button>
+                </div>
             }
         </section>
     )

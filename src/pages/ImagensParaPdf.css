@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+}
+
+.pagina {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 4rem 2rem 2rem;
+    min-height: 100vh;
+    background: black;
+    color: #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.pagina-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.pagina-voltar {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #94a3b8;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.pagina-voltar:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f1f5f9;
+}
+
+.pagina-titulo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.025em;
+}
+
+.pagina-dropzone {
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+.pagina-dropzone:hover {
+    border-color: rgba(167, 139, 250, 0.4);
+    background: rgba(167, 139, 250, 0.04);
+    color: #f1f5f9;
+}
+
+.pagina-lista-vazia {
+    text-align: center;
+    color: #475569;
+    font-size: 0.95rem;
+    padding: 2rem 0;
+}
+
+.pagina-acoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 2rem;
+}
+
+.pagina-botao {
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pagina-botao:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .pagina {
+        padding: 2rem 1.25rem 1.5rem;
+    }
+
+    .pagina-titulo {
+        font-size: 1.375rem;
+    }
+
+    .pagina-lista {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .pagina-acoes {
+        justify-content: stretch;
+    }
+
+    .pagina-botao {
+        width: 100%;
+    }
+}

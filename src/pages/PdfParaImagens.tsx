@@ -4,10 +4,12 @@ import saveAs from 'file-saver'
 import SortableList from '@/components/SortableList/SortableList'
 import { converterPdfEmImagens } from '@/services/pdfToImage'
 import JSZip from 'jszip'
+import { Link } from 'react-router-dom'
+import './PdfParaImagens.css'
 
-function PdfParaImagens () {
+function PdfParaImagens() {
     const [arquivos, setArquivos] = useState<string[]>([])
-    
+
     const processarArquivos = async (lista: File[]) => {
         const resultado = await Promise.all(lista.map(async arquivo => {
             const arquivosConvertidos = await converterPdfEmImagens(arquivo)
@@ -18,31 +20,45 @@ function PdfParaImagens () {
 
     const baixarImagensZip = async (arquivos: string[]) => {
         const zip = new JSZip()
-
-        for(let image = 0; image < arquivos.length; image++) {
+        for (let image = 0; image < arquivos.length; image++) {
             const url = arquivos[image]
-            const bytes = await fetch(url).then(res => res.blob()) 
+            const bytes = await fetch(url).then(res => res.blob())
             zip.file(`imagem-${image}.png`, bytes)
         }
         const imagensBlob = await zip.generateAsync({ type: 'blob' })
-        saveAs(imagensBlob, 'imagens compactadas')
+        saveAs(imagensBlob, 'imagens-compactadas.zip')
     }
 
     return (
-        <section className='section'>
-            <div className='container'>
-                <MyDropzone
-                    onArquivosAdicionados={(e => processarArquivos(e))}
-                    accept={{
-                        'application/pdf': ['.pdf']
-                    }}
-                />
-                <SortableList listaInicial={arquivos} />
-            </div>
+        <section className='pagina'>
+            <header className='pagina-header'>
+                <Link to="/" className='pagina-voltar'>← Voltar</Link>
+                <h1 className='pagina-titulo'>PDF para Imagens</h1>
+            </header>
 
-            {arquivos.length == 0 ?
-                <div></div>
-                : <button onClick={() => baixarImagensZip(arquivos)}>Baixar Imagens</button>
+            <MyDropzone
+                onArquivosAdicionados={(e => processarArquivos(e))}
+                accept={{
+                    'application/pdf': ['.pdf']
+                }}
+            />
+
+            {arquivos.length === 0
+                ? <p className='pagina-lista-vazia'>Nenhum PDF adicionado ainda.</p>
+                : <div style={{ width: '100%' }}>
+                    <SortableList listaInicial={arquivos} />
+                  </div>
+            }
+
+            {arquivos.length > 0 &&
+                <div className='pagina-acoes'>
+                    <button
+                        className='pagina-botao'
+                        onClick={() => baixarImagensZip(arquivos)}
+                    >
+                        Baixar Imagens
+                    </button>
+                </div>
             }
         </section>
     )
