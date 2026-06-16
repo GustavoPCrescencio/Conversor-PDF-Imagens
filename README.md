@@ -40,7 +40,9 @@ src/
 │   ├── Home.tsx           # Página inicial com as três opções
 │   ├── ImagensParaPdf.tsx # Conversor de imagens em PDF
 │   ├── PdfParaImagens.tsx # Conversor de PDF em imagens
-│   └── MisturarArquivos.tsx # Mistura de PDFs e imagens
+│   ├── Home.css           # Design da tela
+│   ├── ImagensParaPdf.css # Design da tela
+│   ├── PdfParaImagens.css # Design da tela
 ├── services/
 │   ├── imageToPdf.ts      # Lógica de conversão de imagens em PDF
 │   └── pdfToImage.ts      # Lógica de conversão de PDF em imagens
